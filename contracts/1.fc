@@ -17,7 +17,7 @@ int slice_hash(slice s) asm "HASHSU";
     slice s = stack~pop_back().begin_parse();
     int h = slice_hash(s);
     if(h == hash){
-      return stack~pop_back();
+      return tree;
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
@@ -34,7 +34,7 @@ int slice_hash(slice s) asm "HASHSU";
     slice s = stack~pop_back().begin_parse();
     int h = slice_hash(s);
     if(h == hash){
-      return stack~pop_back();
+      return tree;
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
