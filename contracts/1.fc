@@ -27,7 +27,7 @@ int slice_hash(slice s) asm "HASHSU";
 }
 
 ;; testable
-(cell) recv_internal(int hash, cell tree) {
+(cell) find_branch_by_hash(int hash, cell tree) method_id {
   tuple stack = null();
   stack~push_back(tree);
   while (~ stack.is_null()) {
