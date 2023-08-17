@@ -9,8 +9,13 @@ forall X -> int is_null (X x) asm "ISNULL";
 forall X -> (tuple, ()) push_back (tuple tail, X head) asm "CONS";
 forall X -> (tuple, (X)) pop_back (tuple t) asm "UNCONS";
 int cell_hash(cell c) asm "HASHCU";
+int slice_refs(slice s) asm "SREFS";
+builder begin_cell() asm "NEWC";
+cell end_cell(builder b) asm "ENDC";
+(slice, cell) load_ref(slice s) asm( -> 1 0) "LDREF";
+slice begin_parse(cell c) asm "CTOS";
 
-(cell) recv_internal(int hash, cell tree) method_id {
+(cell) recv_internal(int hash, cell tree) {
   tuple stack = null();
   stack~push_back(tree);
   while (~ stack.is_null()) {
@@ -29,5 +34,18 @@ int cell_hash(cell c) asm "HASHCU";
 
 ;; testable
 (cell) find_branch_by_hash(int hash, cell tree) method_id {
+  tuple stack = null();
+  stack~push_back(tree);
+  while (~ stack.is_null()) {
+    slice s = stack~pop_back().begin_parse();
+    cell c = s~load_ref();
+    int h = cell_hash(c);
+    if(h == hash){
+      return c;
+    }
+    repeat (s.slice_refs()) {
+      stack~push_back(s~load_ref());
+    }
+  }
   return begin_cell().end_cell();
 }
