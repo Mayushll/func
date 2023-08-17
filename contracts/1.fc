@@ -6,12 +6,22 @@
   this branch should be returned. Return empty cell if the branch is not found.
 -}
 
-() recv_internal() {
-
-}
-
-;; testable
-(cell) find_branch_by_hash(int hash, cell tree) method_id {
+(cell) recv_internal(int hash, ) {
+  cell tree = begin_cell()
+          .store_uint(1, 16)
+          .store_ref(begin_cell()
+                  .store_uint(2, 16)
+                  .end_cell())
+          .store_ref(begin_cell()
+                  .store_uint(3, 16)
+                  .store_ref(begin_cell()
+                          .store_uint(4, 16)
+                          .end_cell())
+                  .store_ref(begin_cell()
+                          .store_uint(5, 16)
+                          .end_cell())
+                  .end_cell())
+          .end_cell();
   tuple stack = null();
   stack~push_back(tree);
   while (~ stack.is_null()) {
@@ -28,5 +38,10 @@
       stack~push_back(s~load_ref());
     }
   }
+  return begin_cell().end_cell();
+}
+
+;; testable
+(cell) find_branch_by_hash(int hash, cell tree) method_id {
   return begin_cell().end_cell();
 }
