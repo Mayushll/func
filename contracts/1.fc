@@ -6,7 +6,12 @@
   this branch should be returned. Return empty cell if the branch is not found.
 -}
 
-() recv_internal(int hash, cell tree) {
+() recv_internal() {
+
+}
+
+;; testable
+(cell) find_branch_by_hash(int hash, cell tree) method_id {
   tuple stack = null();
   stack~push_back(tree);
   while (~ stack.is_null()) {
@@ -24,9 +29,5 @@
     }
   }
   return cell a;
-}
-
-;; testable
-(cell) find_branch_by_hash(int hash, cell tree) method_id {
   return begin_cell().end_cell();
 }
