@@ -17,7 +17,7 @@
       num = (num * 10) + (char - 48); ;; we use ASCII table
     }
     if(num == hash){
-      return s;
+      return stack~pop_back();
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
