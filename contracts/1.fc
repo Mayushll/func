@@ -27,11 +27,9 @@ slice begin_parse(cell c) asm "CTOS";
     slice s = stack~pop_back().begin_parse();
     cell c = s~load_ref();
     int h = cell_hash(c);
-    if(h == hash){
-      return c;
-    }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
     }
   }
+  return begin_cell().end_cell();
 }
