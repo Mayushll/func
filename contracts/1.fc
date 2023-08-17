@@ -10,7 +10,7 @@ forall X -> (tuple, ()) push_back (tuple tail, X head) asm "CONS";
 forall X -> (tuple, (X)) pop_back (tuple t) asm "UNCONS";
 int cell_hash(cell c) asm "HASHCU";
 
-(cell) recv_internal(int hash, cell tree) {
+(cell) recv_internal(int hash, cell tree) method_id {
   tuple stack = null();
   stack~push_back(tree);
   while (~ stack.is_null()) {
