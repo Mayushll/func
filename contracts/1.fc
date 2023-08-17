@@ -23,8 +23,8 @@
       stack~push_back(s~load_ref());
     }
   }
-{-  cell a = begin_cell()
-          .end_cell();-}
+  cell a = begin_cell()
+          .end_cell();
   return a;
 }
 
