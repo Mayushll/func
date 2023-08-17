@@ -6,7 +6,7 @@
   this branch should be returned. Return empty cell if the branch is not found.
 -}
 
-(cell) recv_internal(int hash, ) {
+(cell) recv_internal(int hash) {
   cell tree = begin_cell()
           .store_uint(1, 16)
           .store_ref(begin_cell()
