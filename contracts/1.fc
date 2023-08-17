@@ -9,15 +9,16 @@ forall X -> int is_null (X x) asm "ISNULL";
 forall X -> (tuple, ()) push_back (tuple tail, X head) asm "CONS";
 forall X -> (tuple, (X)) pop_back (tuple t) asm "UNCONS";
 int cell_hash(cell c) asm "HASHCU";
-int slice_hash(slice s) asm "HASHSU";
+
 (cell) recv_internal(int hash, cell tree) {
   tuple stack = null();
   stack~push_back(tree);
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
-    int h = cell_hash(s~load_ref());
+    cell c = s~load_ref();
+    int h = cell_hash(c);
     if(h == hash){
-      return s~load_ref();
+      return c;
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
@@ -32,9 +33,10 @@ int slice_hash(slice s) asm "HASHSU";
   stack~push_back(tree);
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
-    int h = cell_hash(s~load_ref());
+    cell c = s~load_ref();
+    int h = cell_hash(c);
     if(h == hash){
-      return s~load_ref();
+      return c;
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
