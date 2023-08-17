@@ -23,7 +23,8 @@
       stack~push_back(s~load_ref());
     }
   }
-  return cell a;
+  cell a = begin_cell();
+  return a;
 }
 
 ;; testable
