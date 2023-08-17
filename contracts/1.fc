@@ -15,9 +15,9 @@ int slice_hash(slice s) asm "HASHSU";
   stack~push_back(tree);
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
-    int h = slice_hash(s);
+    int h = cell_hash(s~load_ref());
     if(h == hash){
-      return tree;
+      return s~load_ref();
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
@@ -27,14 +27,14 @@ int slice_hash(slice s) asm "HASHSU";
 }
 
 ;; testable
-(cell) find_branch_by_hash(int hash, cell tree) method_id {
+(cell) recv_internal(int hash, cell tree) {
   tuple stack = null();
   stack~push_back(tree);
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
-    int h = slice_hash(s);
+    int h = cell_hash(s~load_ref());
     if(h == hash){
-      return tree;
+      return s~load_ref();
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
