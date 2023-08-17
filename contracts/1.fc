@@ -11,20 +11,20 @@
   stack~push_back(tree);
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
-    int num = 0;
+  {-  int num = 0;
     while (~ s.slice_empty?()) {
       int char = s~load_uint(8);
-      num = (num * 10) + (char - 48); ;; we use ASCII table
+      num = (num * 10) + (char - 48);
     }
     if(num == hash){;
       return tree;
-    }
+    }-}
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
     }
   }
-  cell a = begin_cell()
-          .end_cell();
+{-  cell a = begin_cell()
+          .end_cell();-}
   return a;
 }
 
