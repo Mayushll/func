@@ -31,8 +31,6 @@ slice begin_parse(cell c) asm "CTOS";
     if(h == hash){
       if(s.slice_empty?()){
         return c;
-      } else{
-        return x;
       }
     }
     cell x = c;
