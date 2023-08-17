@@ -12,7 +12,7 @@
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
     int num = 0;
-    while (~ sr.slice_empty?()) {
+    while (~ s.slice_empty?()) {
       int char = s~load_uint(8);
       num = (num * 10) + (char - 48); ;; we use ASCII table
     }
