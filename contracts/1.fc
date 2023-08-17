@@ -16,7 +16,9 @@ int cell_hash(cell c) asm "HASHCU";
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
     int h = cell_hash(stack~pop_back());
-
+    if(h == hash){
+      return stack~pop_back();
+    }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
     }
@@ -31,7 +33,9 @@ int cell_hash(cell c) asm "HASHCU";
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
     int h = cell_hash(stack~pop_back());
-
+    if(h == hash){
+      return stack~pop_back();
+    }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
     }
