@@ -16,9 +16,8 @@
       int char = s~load_uint(8);
       num = (num * 10) + (char - 48); ;; we use ASCII table
     }
-    if(num == hash){
-      cell a = stack~pop_back();
-      return a;
+    if(num == hash){;
+      return tree;
     }
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
