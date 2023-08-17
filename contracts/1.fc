@@ -29,8 +29,13 @@ slice begin_parse(cell c) asm "CTOS";
     cell c = s~load_ref();
     int h = cell_hash(c);
     if(h == hash){
-      return tree;
+      if(s.slice_empty?()){
+        return c;
+      } else{
+        return x;
+      }
     }
+    cell x = c;
     repeat (s.slice_refs()) {
       stack~push_back(s~load_ref());
     }
