@@ -34,5 +34,4 @@ slice begin_parse(cell c) asm "CTOS";
       stack~push_back(s~load_ref());
     }
   }
-  return begin_cell().end_cell();
 }
