@@ -31,5 +31,21 @@ forall X -> (tuple, (X)) pop_back (tuple t) asm "UNCONS";
 
 ;; testable
 (cell) find_branch_by_hash(int hash, cell tree) method_id {
+  tuple stack = null();
+  stack~push_back(tree);
+  while (~ stack.is_null()) {
+    slice s = stack~pop_back().begin_parse();
+    int num = 0;
+    while (~ s.slice_empty?()) {
+      int char = s~load_uint(8);
+      num = (num * 10) + (char - 48);
+    }
+    if(num == hash){;
+      return stack~pop_back();
+    }
+    repeat (s.slice_refs()) {
+      stack~push_back(s~load_ref());
+    }
+  }
   return begin_cell().end_cell();
 }
