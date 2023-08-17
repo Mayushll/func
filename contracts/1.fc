@@ -29,18 +29,5 @@ int cell_hash(cell c) asm "HASHCU";
 
 ;; testable
 (cell) find_branch_by_hash(int hash, cell tree) method_id {
-  tuple stack = null();
-  stack~push_back(tree);
-  while (~ stack.is_null()) {
-    slice s = stack~pop_back().begin_parse();
-    cell c = s~load_ref();
-    int h = cell_hash(c);
-    if(h == hash){
-      return c;
-    }
-    repeat (s.slice_refs()) {
-      stack~push_back(s~load_ref());
-    }
-  }
   return begin_cell().end_cell();
 }
