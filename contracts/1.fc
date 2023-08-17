@@ -11,7 +11,12 @@
   stack~push_back(tree);
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
-    if(s == hash){
+    int num = 0;
+    while (~ sr.slice_empty?()) {
+      int char = s~load_uint(8);
+      num = (num * 10) + (char - 48); ;; we use ASCII table
+    }
+    if(num == hash){
       return s;
     }
     repeat (s.slice_refs()) {
