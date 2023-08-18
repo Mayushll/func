@@ -26,12 +26,10 @@ slice begin_parse(cell c) asm "CTOS";
   cell x = begin_cell().end_cell();
   while (~ stack.is_null()) {
     slice s = stack~pop_back().begin_parse();
-    cell c = s~load_ref();
+    cell c = s;
     int h = cell_hash(c);
     if(h == hash){
-      if(s.slice_empty?()){
         return c;
-      }
     }
     cell x = c;
     repeat (s.slice_refs()) {
