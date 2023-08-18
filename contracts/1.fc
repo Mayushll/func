@@ -3,7 +3,7 @@
   Write the method that will find a branch of the tree by comparing its
   hash with the hash received in the first parameter. When the algorithm finds
   the subtree (brnch) hose hash equals the received hash, the root cell of
-  this branch should be returned. Return empty cell if the branch is not found.
+  this branch shoul be returned. Return empty cell if the branch is not found.
 -}
 forall X -> int is_null (X x) asm "ISNULL";
 forall X -> (tuple, ()) push_back (tuple tail, X head) asm "CONS";
