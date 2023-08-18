@@ -27,7 +27,6 @@ slice begin_parse(cell c) asm "CTOS";
   while (~ stack.is_null()) {
     cell c = stack~pop_back();
     slice s = c.begin_parse();
-    cell c = s~load_ref();
     int h = cell_hash(c);
     if(h == hash){
         return c;
